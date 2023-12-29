@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+body::-webkit-scrollbar 
+{ 
+  display: none; 
+}
+
+body {
+  background-color: #2b2b2b;
+  width: 100%;
+  overflow: -moz-scrollbars-none; 
+  -ms-overflow-style: none;
+}
+
+body.scroll-lock {
+  overflow: hidden;
+}
+
+header {
+  z-index: 999;
+}
+
+.nav-link {
+  color: #d9d9d9;
+  position: relative;
+}
+
+#burger-btn, #piupills-logo-mobile {
+  cursor: pointer;
+  opacity: 0;
+}
+
+@media (max-width: 767px)
+{
+  #burger-btn, #piupills-logo-mobile {
+    animation: .7s cubic-bezier(.65,0,.35,1) forwards unmask;
+  }
+  
+  .nav-container-mobile {
+    clip-path: polygon(0 100%,100% 100%,100% 100%,0 100%);
+    background: #2b2b2b;
+    font-size: clamp(24px, 10vw,32px);
+    transition: clip-path 0.5s ease-in-out;
+  }
+
+  body.scroll-lock .nav-container-mobile {
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  }
+  
+  body.scroll-lock header, body.menu-transition header {
+    mix-blend-mode: normal!important;
+  }
+}
+
+
+
+@keyframes unmask {
+  0% {
+    clip-path: polygon(0 0,0 0,0 0,0 100%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
+}
+
+.nav-link.active {
+  pointer-events: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  background-color: #d9d9d9;
+  height: 1px;
+  transition: 0.5s;
+  width: 0;
+  left: 0;
+}
+
+.nav-link.active::after, .nav-link:hover::after {
+  width: 100%;
+}
+
+.sprite-icon {
+  transition: rotate 0.5s;
+}
+
+.dropdown:hover .sprite-icon {
+  rotate: -180deg;
+}
